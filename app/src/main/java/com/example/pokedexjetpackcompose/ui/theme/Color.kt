@@ -9,3 +9,9 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
+
+val RetroBeige = Color(0xFFFDFFE0)
+val RetroGreen = Color(0xFFD0F65D)
+val GameBoyGrey = Color(0xFFE0E0E0)
+val ScreenBlue = Color(0xFF5BADF4)
+val BorderBlack = Color.Black

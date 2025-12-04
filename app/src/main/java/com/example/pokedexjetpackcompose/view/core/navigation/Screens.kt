@@ -1,4 +1,4 @@
-package com.example.pokedexjetpackcompose.view.navigation
+package com.example.pokedexjetpackcompose.view.core.navigation
 
 import kotlinx.serialization.Serializable
 
