@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +33,9 @@ import com.example.pokedexjetpackcompose.view.core.components.RetroButton
 
 @Preview(showBackground = true)
 @Composable
-fun PokeStartScreen() {
+fun PokeStartScreen(
+    navigateToDashboard: () -> Unit = {}
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -62,7 +63,7 @@ fun PokeStartScreen() {
             Spacer(modifier = Modifier.height(8.dp))
             RetroButton(
                 text = "Get Started!",
-                onClick = { /*TODO*/ },
+                onClick = { navigateToDashboard() },
                 modifier = Modifier.padding(16.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
