@@ -1,6 +1,8 @@
 package com.example.pokedexjetpackcompose.di
 
 import com.example.pokedexjetpackcompose.data.api.ApiService
+import com.example.pokedexjetpackcompose.data.repository.PokemonRepositoryImpl
+import com.example.pokedexjetpackcompose.domain.repository.PokemonRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +24,7 @@ object DataModule {
     fun provideRetrofit(json: Json): Retrofit =
         Retrofit
             .Builder()
-            .baseUrl("")
+            .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(json.asConverterFactory("application/json; charset=UTF8".toMediaType()))
             .build()
 
@@ -32,4 +34,9 @@ object DataModule {
             ignoreUnknownKeys = true
             isLenient = true
         }
+
+    @Provides
+    fun providePokemonRepository(apiService: ApiService): PokemonRepository =
+        PokemonRepositoryImpl(apiService)
+
 }
