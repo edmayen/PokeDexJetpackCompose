@@ -1,5 +1,6 @@
 package com.example.pokedexjetpackcompose.view.core.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -24,20 +26,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.example.pokedexjetpackcompose.R
+import com.example.pokedexjetpackcompose.domain.model.PokeListModel
 import com.example.pokedexjetpackcompose.ui.theme.BorderBlack
 import com.example.pokedexjetpackcompose.ui.theme.GameBoyGrey
-import com.example.pokedexjetpackcompose.ui.theme.ScreenBlue
+import com.example.pokedexjetpackcompose.ui.theme.TypeFire
 
-@Preview(showBackground = true)
 @Composable
-fun GameBoyCard(modifier: Modifier = Modifier) {
+fun PokeListItem(
+    pokemon: PokeListModel,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
-            .fillMaxWidth()
+            .size(170.dp)
     ) {
         Box(
             modifier = Modifier
@@ -47,48 +56,57 @@ fun GameBoyCard(modifier: Modifier = Modifier) {
         )
         Box(
             modifier = modifier
+                .fillMaxSize()
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .clip(RoundedCornerShape(16.dp))
                     .border(3.dp, BorderBlack, RoundedCornerShape(16.dp))
                     .background(GameBoyGrey)
-                    .padding(vertical = 24.dp, horizontal = 36.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .padding(12.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(48.dp)
+                    horizontalArrangement = Arrangement.Center
                 ) {
-                    RedDot(size = 16.dp)
-                    RedDot(size = 16.dp)
+                    RedDot(size = 8.dp)
+                    Spacer(modifier = Modifier.width(16.dp))
+                    RedDot(size = 8.dp)
                 }
-                Spacer(Modifier.height(16.dp))
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .weight(1f)
                         .aspectRatio(1f)
+                        .padding(8.dp)
                         .clip(RoundedCornerShape(12.dp))
                         .border(3.dp, BorderBlack, RoundedCornerShape(12.dp))
-                        .background(ScreenBlue),
+                        .background(pokemon.backgroundColor),
                     contentAlignment = Alignment.Center
                 ) {
                     AsyncImage(
-                        model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+                        model = pokemon.imageUrl,
                         contentDescription = null,
                         modifier = Modifier.fillMaxSize(0.9f)
                     )
                 }
-                Spacer(Modifier.height(16.dp))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    RedDot(size = 24.dp)
+                    RedDot(size = 12.dp)
+                    Text(
+                        text = pokemon.pokemonName,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
                     Icon(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Game Boy",
-                        modifier = Modifier.size(32.dp)
+                        modifier = Modifier.size(16.dp)
                     )
                 }
             }
@@ -96,20 +114,32 @@ fun GameBoyCard(modifier: Modifier = Modifier) {
             Box(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
-                    .offset(x = (-6).dp, y = (-4).dp)
+                    .offset(x = (-8).dp, y = (-6).dp)
                     .clip(RoundedCornerShape(50))
                     .border(3.dp, BorderBlack, RoundedCornerShape(50))
                     .background(Color.White)
-                    .padding(horizontal = 12.dp, vertical = 4.dp)
+                    .padding(horizontal = 8.dp, vertical = 2.dp)
             ) {
                 Text(
-                    text = "#007",
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    text = pokemon.number,
+                    fontSize = 10.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold
                 )
             }
         }
     }
-
 }
 
+@Preview(showBackground = true)
+@Composable
+fun PreviewPokeListItem() {
+    PokeListItem(
+        pokemon = PokeListModel(
+            pokemonName = "Bulbasaur",
+            imageUrl = "",
+            number = "001",
+            backgroundColor = TypeFire,
+        )
+    )
+}

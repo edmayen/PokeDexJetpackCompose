@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.ui.NavDisplay
 import com.example.pokedexjetpackcompose.view.dashboard.DashboardScreen
+import com.example.pokedexjetpackcompose.view.pokelist.PokeListScreen
 import com.example.pokedexjetpackcompose.view.pokestart.PokeStartScreen
 
 @Composable
@@ -30,7 +31,14 @@ fun NavigationWrapper() {
                     )
                 }
                 is Dashboard -> NavEntry(key) {
-                    DashboardScreen()
+                    DashboardScreen(
+                        navigateToPokeList = {
+                            backStack.add(PokeList)
+                        }
+                    )
+                }
+                is PokeList -> NavEntry(key) {
+                    PokeListScreen()
                 }
                 is PokemonDetail -> NavEntry(key) {
 

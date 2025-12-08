@@ -3,6 +3,7 @@ package com.example.pokedexjetpackcompose.di
 import com.example.pokedexjetpackcompose.data.api.ApiService
 import com.example.pokedexjetpackcompose.data.repository.PokemonRepositoryImpl
 import com.example.pokedexjetpackcompose.domain.repository.PokemonRepository
+import com.example.pokedexjetpackcompose.domain.usecases.GetPokemonListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,5 +39,9 @@ object DataModule {
     @Provides
     fun providePokemonRepository(apiService: ApiService): PokemonRepository =
         PokemonRepositoryImpl(apiService)
+
+    @Provides
+    fun provideGetPokemonListUseCase(pokemonRepository: PokemonRepository): GetPokemonListUseCase =
+        GetPokemonListUseCase(pokemonRepository)
 
 }

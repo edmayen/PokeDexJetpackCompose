@@ -5,4 +5,6 @@ data object PokeStart
 
 data object Dashboard
 
+data object PokeList
+
 data object PokemonDetail
