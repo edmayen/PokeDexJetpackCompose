@@ -38,7 +38,11 @@ fun NavigationWrapper() {
                     )
                 }
                 is PokeList -> NavEntry(key) {
-                    PokeListScreen()
+                    PokeListScreen(
+                        navigateBack = {
+                            backStack.removeLastOrNull()
+                        }
+                    )
                 }
                 is PokemonDetail -> NavEntry(key) {
 

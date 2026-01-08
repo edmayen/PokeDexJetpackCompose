@@ -18,9 +18,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        // En tu Activity
         getWindow().setStatusBarColor(getResources().getColor(R.color.black));
-
         setContent {
             PokeDexJetpackComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

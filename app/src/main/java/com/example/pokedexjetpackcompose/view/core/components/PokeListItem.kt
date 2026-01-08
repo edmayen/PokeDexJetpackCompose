@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -26,8 +25,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,7 +37,7 @@ import coil3.compose.AsyncImage
 import com.example.pokedexjetpackcompose.R
 import com.example.pokedexjetpackcompose.domain.model.PokeListModel
 import com.example.pokedexjetpackcompose.ui.theme.BorderBlack
-import com.example.pokedexjetpackcompose.ui.theme.GameBoyGrey
+import com.example.pokedexjetpackcompose.ui.theme.GameBoyGreyV2
 import com.example.pokedexjetpackcompose.ui.theme.TypeFire
 
 @Composable
@@ -63,7 +64,7 @@ fun PokeListItem(
                     .fillMaxSize()
                     .clip(RoundedCornerShape(16.dp))
                     .border(3.dp, BorderBlack, RoundedCornerShape(16.dp))
-                    .background(GameBoyGrey)
+                    .background(GameBoyGreyV2)
                     .padding(12.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween
@@ -85,10 +86,18 @@ fun PokeListItem(
                         .background(pokemon.backgroundColor),
                     contentAlignment = Alignment.Center
                 ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.pokedex_background),
+                        contentDescription = "Pokeball",
+                        contentScale = ContentScale.FillBounds,
+                        modifier = Modifier
+                    )
                     AsyncImage(
                         model = pokemon.imageUrl,
                         contentDescription = null,
-                        modifier = Modifier.fillMaxSize(0.9f)
+                        modifier = Modifier
+                            .fillMaxSize(0.9f)
+
                     )
                 }
                 Row(
@@ -101,7 +110,10 @@ fun PokeListItem(
                         fontWeight = FontWeight.Bold,
                         fontSize = 12.sp,
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Center,
+                        color = Color.Black,
+                        modifier = Modifier.weight(1f).align(Alignment.CenterVertically)
                     )
                     Icon(
                         imageVector = Icons.Default.Menu,

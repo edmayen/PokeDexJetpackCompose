@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import androidx.compose.ui.graphics.Color
+import androidx.paging.PagingData
 import androidx.palette.graphics.Palette
 import com.example.pokedexjetpackcompose.data.api.response.PokeListResponse
 import com.example.pokedexjetpackcompose.domain.model.PokeListModel
@@ -17,15 +18,7 @@ import javax.inject.Inject
 class GetPokemonListUseCase @Inject constructor(
     private val pokeRepository: PokemonRepository
 ) {
-    suspend operator fun invoke(): Flow<Resource<List<PokeListModel>>> =
-        flow {
-            val result = pokeRepository.getPokemonList()
-            if (result is Resource.Success) {
-                emit(result)
-            } else {
-                emit(result)
-            }
-        }
+    operator fun invoke(): Flow<PagingData<PokeListModel>> = pokeRepository.getPokemonList()
 
     private fun calcDominantColor(drawable: Drawable, onFinish: (Color) -> Unit) {
         val bmp = (drawable as BitmapDrawable).bitmap.copy(Bitmap.Config.ARGB_8888, true)
