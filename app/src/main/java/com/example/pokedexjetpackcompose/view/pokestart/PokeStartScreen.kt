@@ -51,11 +51,11 @@ fun PokeStartScreen(
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Image(
-                painter = painterResource(id = R.drawable.pokemon_logo),
+                painter = painterResource(id = R.drawable.ic_international_pok_mon_logo),
                 contentDescription = "Pokeball",
                 modifier = Modifier
                     .align(Alignment.Start)
-                    .width(120.dp)
+                    .width(180.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
             GameBoyCard(modifier = Modifier)

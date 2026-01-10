@@ -3,6 +3,7 @@ package com.example.pokedexjetpackcompose.view.core.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,11 +44,13 @@ import com.example.pokedexjetpackcompose.ui.theme.TypeFire
 @Composable
 fun PokeListItem(
     pokemon: PokeListModel,
+    onItemClicked: (name: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
             .size(170.dp)
+            .clickable { onItemClicked(pokemon.pokemonName) }
     ) {
         Box(
             modifier = Modifier
@@ -148,10 +151,12 @@ fun PokeListItem(
 fun PreviewPokeListItem() {
     PokeListItem(
         pokemon = PokeListModel(
+            pokemonId = "1",
             pokemonName = "Bulbasaur",
             imageUrl = "",
             number = "001",
             backgroundColor = TypeFire,
-        )
+        ),
+        onItemClicked = {}
     )
 }

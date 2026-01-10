@@ -30,7 +30,8 @@ import com.example.pokedexjetpackcompose.view.core.components.TopAppBar
 @Composable
 fun PokeListScreen(
     viewModel: PokeListViewModel = hiltViewModel(),
-    navigateBack: () -> Unit = {}
+    navigateToDetail: (name: String) -> Unit,
+    navigateBack: () -> Unit
 ) {
     val pokemonList = viewModel.pokemonList.collectAsLazyPagingItems()
 
@@ -86,9 +87,17 @@ fun PokeListScreen(
                                 bottom = 24.dp
                             )
                         ) {
-                            items(pokemonList.itemCount) {
-                                pokemonList[it]?.let { pokemon ->
-                                    PokeListItem(pokemon = pokemon)
+                            items(
+                                count = pokemonList.itemCount,
+                                key = { index -> pokemonList[index]?.pokemonId ?: index }
+                            ) { index ->
+                                pokemonList[index]?.let { pokemon ->
+                                    PokeListItem(
+                                        pokemon = pokemon,
+                                        onItemClicked = { name ->
+                                            navigateToDetail(name)
+                                        }
+                                    )
                                 }
                             }
                         }

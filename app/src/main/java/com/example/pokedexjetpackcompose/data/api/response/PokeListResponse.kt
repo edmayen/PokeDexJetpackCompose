@@ -23,6 +23,7 @@ data class PokeListResult(
 )
 
 fun PokeListResult.toDomain(): PokeListModel = PokeListModel(
+    pokemonId = url?.extractLastNumber() ?: "",
     pokemonName = name?.capitalizeFirst() ?: "",
     imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${url?.extractLastNumber()}.png",
     number = url?.extractLastNumberAndFormat() ?: "",

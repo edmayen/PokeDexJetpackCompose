@@ -7,4 +7,4 @@ data object Dashboard
 
 data object PokeList
 
-data object PokemonDetail
+data class PokemonDetail(val pokemonName: String)
